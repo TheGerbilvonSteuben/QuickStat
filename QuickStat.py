@@ -18,26 +18,20 @@ from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.label import Label
-
 from plyer import filechooser
 
 # Set the app size
 Window.size = (800,800)
 
-# Full screen app
-#Window.fullscreen = True
-#Window.maximize()
-
 # Designate Our .kv design file 
 Builder.load_file('QuickStat.kv')
 
-# Need to check if we still need this
 class myLayout(GridLayout):
   def __init__(self, **kwargs):
     super(GridLayout, self).__init__(**kwargs)
 
     
-  # clickity clack action
+  # Get the csv file
   def press(self):
     path = filechooser.open_file(title="Pick a CSV file..", 
                              filters=[("Comma-separated Values", "*.csv")])
@@ -45,7 +39,7 @@ class myLayout(GridLayout):
 
 
       
-class Main(App):
+class QuickStat(App):
   # Window Title
   title = 'QuickStat'
   
@@ -53,4 +47,4 @@ class Main(App):
     return myLayout()
 
 if __name__ == '__main__':
-    Main().run()
+    QuickStat().run()
