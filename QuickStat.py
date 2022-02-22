@@ -1,20 +1,17 @@
 from cgitb import text
-import kivy
 from kivy.app import App
-from kivy.uix.button import Button
 from kivy.config import Config 
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.uix.label import Label
+from kivy.properties import ObjectProperty
 from plyer import filechooser
 
 # Set the app size
 Window.size = (800,800)
 
 # Designate Our .kv design file 
-Builder.load_file('QuickStat.kv')
+Builder.load_file('QuickStatStart.kv')
 
 class myLayout(Widget):
     
