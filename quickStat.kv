@@ -1,10 +1,15 @@
 #:kivy 2.0
-<MyGridLayout>
-    GridLayout:
-        cols: 1
+<myLayout>
+    BoxLayout:
+        orientation: "vertical"
         size: root.width, root.height
     
         Button:
             text: "Select Dataset"
             font_size: 32
             on_press: root.press()
+            size: (50, 100)
+        
+        Label:
+            text:'© QuickStat Team. All Rights Reserved.'
+            font_size: 15
