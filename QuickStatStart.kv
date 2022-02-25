@@ -1,16 +1,48 @@
 #:kivy 2.0
-<myLayout>
-    cols: 1
-    BoxLayout:
-        orientation: "vertical"
-        size: root.width, root.height
-    
-        Button:
-            text: "Select Dataset"
-            font_size: 32
-            on_press: root.press()
-            size: (50, 100)
-        
-        Label:
-            text:'© QuickStat Team. All Rights Reserved.'
-            font_size: 15
+<first_window>:
+	name: "first"
+	
+	cols: 1
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		
+		Button:
+			text: "Select Dataset"
+			font_size: 32
+			on_press: root.file_chooser()
+			size: (50, 100)
+		
+		Button:
+			text: "Submit"
+			on_release: 
+				root.manager.current = 'second'
+				root.manager.transition.direction = 'left'
+
+		Label:
+			text:'© QuickStat Team. All Rights Reserved.'
+			font_size: 15
+
+<second_window>:
+	name: "second"
+
+	BoxLayout:
+		cols: 4
+
+		Label:
+			text: "Exclude Nulls"
+
+		CheckBox:
+			on_active: root.exclude_null(self, self.active)
+
+		Label:
+			text: "Exclude Outliers"
+			
+		CheckBox:
+			on_active: root.exclude_outliers(self, self.active)
+
+		Button:
+			text: "Go Back"
+			on_release:
+				root.manager.current = "first"
+				root.manager.transition.direction = "right"
