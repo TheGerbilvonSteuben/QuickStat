@@ -19,7 +19,7 @@ Window.size = (800,800)
 
 # Global variables
 filepath = ''
-
+df = pd.DataFrame()
 # Declare Screens
 
 # Main window. Choose a dataset.
@@ -37,6 +37,7 @@ class Display(Screen):
   # Create dataframe from selected csv
   def createdf(self):
     global filepath
+    global df 
     df = pd.read_csv(filepath[0])
     print(df.head)
 
