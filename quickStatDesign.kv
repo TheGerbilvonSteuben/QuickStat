@@ -1,9 +1,13 @@
 #:kivy 2.0
-<first_window>:
-	name: "first"
-	
-	cols: 1
+<ScreenManager>:
+	Startup:
+		name: 'startup'
+	Display:
+		name: 'display'
+
+<Startup>:
 	BoxLayout:
+		cols: 1
 		orientation: "vertical"
 		size: root.width, root.height
 		
@@ -16,18 +20,17 @@
 		Button:
 			text: "Submit"
 			on_release: 
-				root.manager.current = 'second'
+				root.manager.current = 'display'
 				root.manager.transition.direction = 'left'
 
 		Label:
 			text:'© QuickStat Team. All Rights Reserved.'
 			font_size: 15
 
-<second_window>:
-	name: "second"
-
+<Display>:
 	BoxLayout:
 		cols: 4
+		size: root.width, root.height
 
 		Label:
 			text: "Exclude Nulls"
@@ -44,5 +47,5 @@
 		Button:
 			text: "Go Back"
 			on_release:
-				root.manager.current = "first"
+				root.manager.current = "startup"
 				root.manager.transition.direction = "right"

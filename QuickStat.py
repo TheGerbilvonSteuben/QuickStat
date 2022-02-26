@@ -6,23 +6,40 @@
 
 
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.lang import Builder
 from plyer import filechooser
+from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+import pandas as pd
+
+
+# Set the app size
+Window.size = (800,800)
+
+# Global variables
+filepath = ''
 
 # Declare Screens
-# Main window. Option to choose a dataset.
-class first_window(Screen):
-  pass
 
-# Second window. Data Analysis Screen with several options
-class second_window(Screen):
+# Main window. Choose a dataset.
+class Startup(Screen):
   # Get the csv file
   def file_chooser(self):
-    path = filechooser.open_file(title="Pick a CSV file..", filters=[("Comma-separated Values", "*.csv")])
-    print(path)
+    global filepath 
+    filepath = filechooser.open_file(title="Pick a CSV file..", filters=[("Comma-separated Values", "*.csv")])
+  
+  pass
+
+
+# Second window. Data Analysis Screen with several options
+class Display(Screen):
+
+  # Create dataframe from selected csv
+  def createdf(self):
+    global filepath
+    df = pd.read_csv(filepath)
+    df.head
 
   # Checkbox exclude null
   def exclude_null(self, instance, value):
@@ -34,27 +51,18 @@ class second_window(Screen):
     
   pass
 
-# Set the app size
-Window.size = (800,800)
 
 # Designate Our .kv design file 
-kv = Builder.load_file('QuickStatStart.kv')
-    
+kv_file = Builder.load_file('quickStatDesign.kv')
 
-      
+
 class QuickStat(App):
   # Window Title
   title = 'QuickStat'
   
   def build(self):
-    # Create the screen manager
-    sm = ScreenManager()
-    sm.add_widget(first_window(name = 'first'))
-    sm.add_widget(second_window(name = 'second'))
-
     
-    
-    return sm
+    return ScreenManager()
 
 if __name__ == '__main__':
     QuickStat().run()
