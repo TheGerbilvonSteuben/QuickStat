@@ -28,18 +28,17 @@ class Startup(Screen):
   def file_chooser(self):
     global filepath 
     filepath = filechooser.open_file(title="Pick a CSV file..", filters=[("Comma-separated Values", "*.csv")])
-  
-  pass
+    print(filepath)
 
 
 # Second window. Data Analysis Screen with several options
 class Display(Screen):
-
+  
   # Create dataframe from selected csv
   def createdf(self):
     global filepath
-    df = pd.read_csv(filepath)
-    df.head
+    df = pd.read_csv(filepath[0])
+    print(df.head)
 
   # Checkbox exclude null
   def exclude_null(self, instance, value):
@@ -48,8 +47,6 @@ class Display(Screen):
   # Checkbox exclude outliers
   def exclude_outliers(self, instance, value):
     print("Exclude Outliers:", value)
-    
-  pass
 
 
 # Designate Our .kv design file 
