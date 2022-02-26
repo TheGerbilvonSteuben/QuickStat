@@ -35,11 +35,23 @@ class Startup(Screen):
 class Display(Screen):
   
   # Create dataframe from selected csv
-  def createdf(self):
+  def create_df(self):
     global filepath
     global df 
     df = pd.read_csv(filepath[0])
     print(df.head)
+
+    result = df.select_dtypes(include='number')
+    #print(result)
+
+    numeric_cols = result.columns.values
+    #print(numeric_cols)
+
+    for col_name in numeric_cols:
+      print(col_name, " Mean:", df[col_name].mean())
+
+    print(df.describe())
+    
 
   # Checkbox exclude null
   def exclude_null(self, instance, value):
