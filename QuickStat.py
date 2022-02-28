@@ -24,42 +24,42 @@ df = pd.DataFrame()
 
 # Main window. Choose a dataset.
 class Startup(Screen):
-  # Get the csv file
-  def file_chooser(self):
-    global filepath 
-    filepath = filechooser.open_file(title="Pick a CSV file..", filters=[("Comma-separated Values", "*.csv")])
-    print(filepath)
+    # Get the csv file
+    def file_chooser(self):
+        global filepath
+        filepath = filechooser.open_file(title="Pick a CSV file..", filters=[("Comma-separated Values", "*.csv")])
+        print(filepath)
 
 
 # Second window. Data Analysis Screen with several options
 class Display(Screen):
-  
-  # Create dataframe from selected csv
-  def create_df(self):
-    global filepath
-    global df 
-    df = pd.read_csv(filepath[0])
-    print(df.head)
 
-    result = df.select_dtypes(include='number')
-    #print(result)
+    # Create dataframe from selected csv
+    def create_df(self):
+        global filepath
+        global df
+        df = pd.read_csv(filepath[0])
+        print(df.head)
 
-    numeric_cols = result.columns.values
-    #print(numeric_cols)
+        result = df.select_dtypes(include='number')
+        #print(result)
 
-    for col_name in numeric_cols:
-      print(col_name, " Mean:", df[col_name].mean())
+        numeric_cols = result.columns.values
+        #print(numeric_cols)
 
-    print(df.describe())
-    
+        for col_name in numeric_cols:
+            print(col_name, " Mean:", df[col_name].mean())
 
-  # Checkbox exclude null
-  def exclude_null(self, instance, value):
-    print("Exclude Null:", value)
-  
-  # Checkbox exclude outliers
-  def exclude_outliers(self, instance, value):
-    print("Exclude Outliers:", value)
+        print(df.describe())
+
+
+    # Checkbox exclude null
+    def exclude_null(self, instance, value):
+        print("Exclude Null:", value)
+
+    # Checkbox exclude outliers
+    def exclude_outliers(self, instance, value):
+        print("Exclude Outliers:", value)
 
 
 # Designate Our .kv design file 
@@ -67,11 +67,9 @@ kv_file = Builder.load_file('quickStatDesign.kv')
 
 
 class QuickStat(App):
-  # Window Title
-  title = 'QuickStat'
-  
-  def build(self):
-    
+   # Window Title
+   title = 'QuickStat'
+   def build(self):
     return ScreenManager()
 
 if __name__ == '__main__':
