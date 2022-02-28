@@ -75,9 +75,11 @@ kv_file = Builder.load_file('quickStatDesign.kv')
 
 
 class quickStat(App):
+    """Main application"""
     # Window Title
     title = 'QuickStat'
     def build(self):
+        """Builds the app"""
         return ScreenManager()
 
 if __name__ == '__main__':
