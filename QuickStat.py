@@ -1,3 +1,6 @@
+"""
+A app for retreiving statistics from a csv file.
+"""
 # create a virtual environment in your current directory
 # python -m virtualenv kivy_venv
 
@@ -18,48 +21,52 @@ Window.size = (800,800)
 
 # Global variables
 FILEPATH = ''
-df = pd.DataFrame()
+DF = pd.DataFrame()
 # Declare Screens
 
 # Main window. Choose a dataset.
 class Startup(Screen):
+    """Startup screen with buttons for csv file selection"""
     # Get the csv file
     def file_chooser(self):
         """Lets a user select a csv file"""
         global FILEPATH
-        FILEPATH = filechooser.open_file(title="Pick a CSV file..", 
+        FILEPATH = filechooser.open_file(title="Pick a CSV file..",
                                         filters=[("Comma-separated Values", "*.csv")])
         print(FILEPATH)
 
 
 # Second window. Data Analysis Screen with several options
 class Display(Screen):
-
+    """Screen for displaying statistics from given csv file."""
     # Create dataframe from selected csv
-    def create_df(self):
+    def create_DF(self):
+        """Function for creating a dataframe from given csv file."""
         global FILEPATH
-        global df
-        df = pd.read_csv(FILEPATH[0])
-        print(df.head)
+        global DF
+        DF = pd.read_csv(FILEPATH[0])
+        print(DF.head)
 
-        result = df.select_dtypes(include='number')
+        result = DF.select_dtypes(include='number')
         #print(result)
 
         numeric_cols = result.columns.values
         #print(numeric_cols)
 
         for col_name in numeric_cols:
-            print(col_name, " Mean:", df[col_name].mean())
+            print(col_name, " Mean:", DF[col_name].mean())
 
-        print(df.describe())
+        print(DF.describe())
 
 
     # Checkbox exclude null
     def exclude_null(self, instance, value):
+        """Function for excluding Null values."""
         print("Exclude Null:", value)
 
     # Checkbox exclude outliers
     def exclude_outliers(self, instance, value):
+        """Function for excluding outliers."""
         print("Exclude Outliers:", value)
 
 
@@ -67,11 +74,11 @@ class Display(Screen):
 kv_file = Builder.load_file('quickStatDesign.kv')
 
 
-class QuickStat(App):
+class quickStat(App):
     # Window Title
     title = 'QuickStat'
     def build(self):
         return ScreenManager()
 
 if __name__ == '__main__':
-    QuickStat().run()
+    quickStat().run()
