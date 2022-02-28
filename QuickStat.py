@@ -9,7 +9,6 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 from plyer import filechooser
-from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 import pandas as pd
 
@@ -18,7 +17,7 @@ import pandas as pd
 Window.size = (800,800)
 
 # Global variables
-filepath = ''
+FILEPATH = ''
 df = pd.DataFrame()
 # Declare Screens
 
@@ -26,9 +25,11 @@ df = pd.DataFrame()
 class Startup(Screen):
     # Get the csv file
     def file_chooser(self):
-        global filepath
-        filepath = filechooser.open_file(title="Pick a CSV file..", filters=[("Comma-separated Values", "*.csv")])
-        print(filepath)
+        """Lets a user select a csv file"""
+        global FILEPATH
+        FILEPATH = filechooser.open_file(title="Pick a CSV file..", 
+                                        filters=[("Comma-separated Values", "*.csv")])
+        print(FILEPATH)
 
 
 # Second window. Data Analysis Screen with several options
@@ -36,9 +37,9 @@ class Display(Screen):
 
     # Create dataframe from selected csv
     def create_df(self):
-        global filepath
+        global FILEPATH
         global df
-        df = pd.read_csv(filepath[0])
+        df = pd.read_csv(FILEPATH[0])
         print(df.head)
 
         result = df.select_dtypes(include='number')
@@ -62,15 +63,15 @@ class Display(Screen):
         print("Exclude Outliers:", value)
 
 
-# Designate Our .kv design file 
+# Designate Our .kv design file
 kv_file = Builder.load_file('quickStatDesign.kv')
 
 
 class QuickStat(App):
-   # Window Title
-   title = 'QuickStat'
-   def build(self):
-    return ScreenManager()
+    # Window Title
+    title = 'QuickStat'
+    def build(self):
+        return ScreenManager()
 
 if __name__ == '__main__':
     QuickStat().run()
