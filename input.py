@@ -71,6 +71,7 @@ class Startup(Screen):
                 can_be_float_converted[each] = self.data_type_checker(data_per_column[each])
             print(each + " = " + str(can_be_float_converted[each]))
         print()
+
         print(self.run_this)
         if self.run_this == True:
             self.options(can_be_float_converted)
@@ -83,15 +84,15 @@ class Startup(Screen):
             self.median_per_unique('Item Type', 'Total Profit')
         file.close()
 
+    # Used to open csv file.
     def file_selector(self):
         global path
         path = filechooser.open_file(title="Pick a CSV file..", 
                              filters=[("Comma-separated Values", "*.csv")])
         print(path)
-        Display.mytext = "Item Type"
-
+        
     # Checks if a data type can be converted to a float for math calculations. 
-    def data_type_checker(self,some_list):
+    def data_type_checker(self,some_list): 
         can_be_converted = True
         for each in some_list:
             try:
