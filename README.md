@@ -1,4 +1,7 @@
 # QuickStat
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TheGerbilvonSteuben_QuickStat&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TheGerbilvonSteuben_QuickStat)
+
 Team Members: Jerret Stovall, Reynaldo Lopez, Ashish Acharya
 
 Senior Experience Project for CS4360
