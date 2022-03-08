@@ -10,22 +10,45 @@
 		cols: 1
 		orientation: "vertical"
 		size: root.width, root.height
+		spacing: 20
+		padding: 20
 		
 		Button:
 			text: "Select Dataset"
 			font_size: 32
 			on_release: root.file_chooser()
+			size_hint_y: None
+			height: 25
 			size: (50, 100)
 		
 		Button:
 			text: "Submit"
+			font_size: 32
+			color: (0,0,0,1)
+			background_normal: ''
+			background_color: (0,.6,0,1)
+			size_hint_y: None
+			height: 25
+			size: (50, 100)
 			on_release: 
 				root.manager.current = 'display'
 				root.manager.transition.direction = 'left'
+			
 
 		Label:
 			text:'© QuickStat Team. All Rights Reserved.'
-			font_size: 15
+			font_size: 17
+			size_hint_y: None
+			height: 25
+			size: (50, 100)
+			background_color: (.7,.5,.5,1)
+			canvas.before:
+				Color:
+					rgba: self.background_color
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			
 
 <Display>:
 	on_enter: root.create_DF()
