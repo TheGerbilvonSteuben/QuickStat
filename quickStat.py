@@ -28,7 +28,7 @@ DF = pd.DataFrame()
 class Startup(Screen): # pylint: disable=too-few-public-methods
     """Startup screen with buttons for csv file selection"""
     # Get the csv file
-    def file_chooser(self):
+    def file_chooser(self): # pylint: disable=no-self-use
         """Lets a user select a csv file"""
         global FILEPATH
         FILEPATH = filechooser.open_file(title="Pick a CSV file..",
@@ -40,7 +40,7 @@ class Startup(Screen): # pylint: disable=too-few-public-methods
 class Display(Screen):
     """Screen for displaying statistics from given csv file."""
     # Create dataframe from selected csv
-    def create_DF(self):
+    def create_DF(self): # pylint: disable=no-self-use
         """Function for creating a dataframe from given csv file."""
         global FILEPATH
         global DF
@@ -78,7 +78,7 @@ class QuickStat(App): # pylint: disable=too-few-public-methods
     """Main application"""
     # Window Title
     title = 'QuickStat'
-    def build(self):
+    def build(self): # pylint: disable=no-self-use
         """Builds the app"""
         return ScreenManager()
 
