@@ -57,6 +57,7 @@ class Startup(Screen):
         index = 0    
 
         # All data from CSV file will be stored in data_per_column for processing.
+        # Achieved by DF = pd.read_csv(FILEPATH[0])
         for each_column in header_column:
             data_per_column[each_column] = [0] * total_records
             for each in range(0,total_records):
@@ -64,6 +65,7 @@ class Startup(Screen):
             index += 1
 
         # Checks for the ability to convert data in a column to a floating point for math purposes.
+        # Achieved by result = DF.select_dtypes(include='number')
         print("Checking for ability to convert string to floating point for calculations.")
         for each in data_per_column:
             if "ID" in each or "id" in each:
@@ -93,6 +95,7 @@ class Startup(Screen):
         print(path)
         
     # Checks if a data type can be converted to a float for math calculations. 
+    # Achieved by result = DF.select_dtypes(include='number') as stated previously
     def data_type_checker(self,some_list): 
         can_be_converted = True
         for each in some_list:
@@ -105,6 +108,10 @@ class Startup(Screen):
         return can_be_converted
 
     # Determines what is stat options can be worked based on data types. Uses "can_be_float_converted" dictionary as an input.
+    # IN PROGRESS: This can be achieved by creating a functions that takes in the df column and a boolean- num or not
+    # df_column_methods which will include all required pandas methods. 
+    # based on the boolean -> exactly how Rey has implemented it, we will selectively run the methods
+    # e.g. df.nunique() will give uniqe counts from the data in a column
     def options(self,some_dictionary):
         print("The following is the columns and their calculation abilities.") # This print is only used to see result.  NOT NEEDED.
         global stat_options
@@ -118,6 +125,7 @@ class Startup(Screen):
 
 
     # Counts each of the unique values within a column.   
+    # df.nunique() Not tested. This line should return all unqiue values. A .count() method will give the count also.
     def count_per_value(self, column):
         print("The following is the count of unique values within the " + str(column) +  " column.")# This print is only used to see result.  NOT NEEDED.
         checked_list = []
@@ -136,6 +144,9 @@ class Startup(Screen):
 
     # Calculates the percentage ratio per unique item of the total records.
     # CAN ONLY BE USED if count_per_value function is used FIRST.
+    # First idea: we will only take % Ratio for top XYZ items. We could end with 1000 items which 
+    # is too much to display on the screen. 
+    # 
     def percentage_ratio(self, column):
         print("The following is the percentage ration values of unique items in the " + str(column) +  " column.") # This print is only used to see result.  NOT NEEDED.
         global count_dictionary, percentage_dictionary, total_records
@@ -248,7 +259,7 @@ class Display(Screen):
     def exclude_outliers(self, instance, value):
         print("Exclude Outliers:", value)
 
-kv_file = Builder.load_file('inputStatDesign.kv')
+kv_file = Builder.load_file('quickStatDesign.kv')
 
 class MyApp(App):
     # Window Title
