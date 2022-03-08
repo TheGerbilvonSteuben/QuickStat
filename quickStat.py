@@ -74,7 +74,7 @@ class Display(Screen):
 kv_file = Builder.load_file('quickStatDesign.kv')
 
 
-class quickStat(App):
+class QuickStat(App):
     """Main application"""
     # Window Title
     title = 'QuickStat'
@@ -83,4 +83,4 @@ class quickStat(App):
         return ScreenManager()
 
 if __name__ == '__main__':
-    quickStat().run()
+    QuickStat().run()
