@@ -60,12 +60,12 @@ class Display(Screen):
 
 
     # Checkbox exclude null
-    def exclude_null(self, instance, value):
+    def exclude_null(self, instance, value): # pylint: disable=no-self-use
         """Function for excluding Null values."""
         print("Exclude Null:", value)
 
     # Checkbox exclude outliers
-    def exclude_outliers(self, instance, value):
+    def exclude_outliers(self, instance, value): # pylint: disable=no-self-use
         """Function for excluding outliers."""
         print("Exclude Outliers:", value)
 
