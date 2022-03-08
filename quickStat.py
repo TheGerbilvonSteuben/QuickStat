@@ -25,7 +25,7 @@ DF = pd.DataFrame()
 # Declare Screens
 
 # Main window. Choose a dataset.
-class Startup(Screen):
+class Startup(Screen): # pylint: disable=too-few-public-methods
     """Startup screen with buttons for csv file selection"""
     # Get the csv file
     def file_chooser(self):
@@ -74,7 +74,7 @@ class Display(Screen):
 kv_file = Builder.load_file('quickStatDesign.kv')
 
 
-class QuickStat(App):
+class QuickStat(App): # pylint: disable=too-few-public-methods
     """Main application"""
     # Window Title
     title = 'QuickStat'
