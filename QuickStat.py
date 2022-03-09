@@ -17,7 +17,7 @@ import pandas as pd
 
 
 # Set the app size
-Window.size = (800,800)
+Window.size = (400,400)
 
 # Global variables
 FILEPATH = ''
