@@ -1,4 +1,5 @@
 #:kivy 2.0
+#:import webbrowser webbrowser
 <ScreenManager>:
 	Startup:
 		name: 'startup'
@@ -16,26 +17,18 @@
 		Button:
 			text: "Select Dataset"
 			font_size: 32
-			on_release: root.file_chooser()
-			size_hint_y: None
-			height: 25
-			size: (50, 100)
-		
-		Button:
-			text: "Submit"
-			font_size: 32
 			background_normal: ''
 			background_color: (0,.6,0,1)
 			size_hint_y: None
 			height: 25
 			size: (50, 100)
 			on_release: 
+				root.file_chooser()
 				root.manager.current = 'display'
 				root.manager.transition.direction = 'left'
-			
-
-		Label:
-			text:'© QuickStat Team. All Rights Reserved.'
+		
+		Button:
+			text:'QuickStat Team. All Rights Reserved.'
 			font_size: 17
 			size_hint_y: None
 			height: 25
@@ -48,25 +41,15 @@
 				Rectangle:
 					size: self.size
 					pos: self.pos
+			on_release: webbrowser.open('https://github.com/TheGerbilvonSteuben/QuickStat')
 			
 
 <Display>:
-	on_enter: root.create_DF()
+	on_enter: root.create_df()
 	BoxLayout:
 		cols: 4
 		size: root.width, root.height
-		Label:
-			text: "Exclude Nulls"
-
-		CheckBox:
-			on_active: root.exclude_null(self, self.active)
-
-		Label:
-			text: "Exclude Outliers"
-			
-		CheckBox:
-			on_active: root.exclude_outliers(self, self.active)
-
+		
 		Button:
 			text: "Go Back"
 			on_release:
