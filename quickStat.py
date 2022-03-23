@@ -27,7 +27,7 @@ DF = pd.DataFrame()
 class Startup(Screen):
     """Startup screen with buttons for csv file selection"""
     # Get the csv file
-    def file_chooser(self): 
+    def file_chooser(self):
         """Lets a user select a csv file"""
         global FILEPATH
         FILEPATH = filechooser.open_file(
@@ -69,7 +69,7 @@ class QuickStat(App):
 
     def nothing(self):
         print('test')
-    
+
     def add_tab(self):
         tp = TabbedPanel()
         th = TabbedPanelHeader(text='Tab2')
