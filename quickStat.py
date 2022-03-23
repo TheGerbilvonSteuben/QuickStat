@@ -13,6 +13,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
 import pandas as pd
+from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
 
 # Set the app size
 Window.size = (400, 260)
@@ -65,6 +66,14 @@ class QuickStat(App):
     """Main application"""
     # Window Title
     title = 'QuickStat'
+
+    def nothing(self):
+        print('test')
+    
+    def add_tab(self):
+        tp = TabbedPanel()
+        th = TabbedPanelHeader(text='Tab2')
+        tp.add_widget(th)
 
     def build(self):
         """Builds the app"""
