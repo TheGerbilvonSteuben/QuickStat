@@ -70,8 +70,7 @@ class QuickStat(App):
     def nothing(self):
         print('test')
     
-    def add_tab(self):
-        tp = TabbedPanel()
+    def add_tab(self, tp):
         th = TabbedPanelHeader(text='Tab2')
         tp.add_widget(th)
 
