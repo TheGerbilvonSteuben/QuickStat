@@ -13,7 +13,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
 import pandas as pd
-from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
+from kivy.uix.tabbedpanel import TabbedPanelHeader
 
 # Set the app size
 Window.size = (400, 260)
@@ -27,7 +27,7 @@ DF = pd.DataFrame()
 class Startup(Screen):
     """Startup screen with buttons for csv file selection"""
     # Get the csv file
-    def file_chooser(self): 
+    def file_chooser(self):
         """Lets a user select a csv file"""
         global FILEPATH
         FILEPATH = filechooser.open_file(
@@ -69,9 +69,8 @@ class QuickStat(App):
 
     def nothing(self):
         print('test')
-    
-    def add_tab(self):
-        tp = TabbedPanel()
+
+    def add_tab(self, tp):
         th = TabbedPanelHeader(text='Tab2')
         tp.add_widget(th)
 
