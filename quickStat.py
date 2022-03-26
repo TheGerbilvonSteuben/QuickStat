@@ -9,11 +9,11 @@ A app for retreiving statistics from a csv file.
 
 from kivy.app import App
 from kivy.core.window import Window
-from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
 import pandas as pd
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
+from kivy.uix.label import Label
 
 # Set the app size
 Window.size = (400, 260)
@@ -33,7 +33,7 @@ class Startup(Screen):
         FILEPATH = filechooser.open_file(
             title="Pick a CSV file..",
             filters=[("Comma-separated Values", "*.csv")])
-        print(FILEPATH)
+        # print(FILEPATH)
 
 
 # Data Analysis screen/window
@@ -45,19 +45,15 @@ class Display(Screen):
         global FILEPATH
         global DF
         DF = pd.read_csv(FILEPATH[0])
-
+        # print(DF)
         tp = TabbedPanel()
         tp.do_default_tab = False
         for column_header in DF:
-            print(column_header)
             th = TabbedPanelHeader(text=column_header)
-            
+            label = Label(text='yolo')
             tp.add_widget(th)
+            tp.add_widget(label, 1)
         self.add_widget(tp)
-
-
-# Designate Our .kv design file
-kv_file = Builder.load_file('quickStatDesign.kv')
 
 
 class QuickStat(App):
