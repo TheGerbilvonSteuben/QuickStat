@@ -45,23 +45,4 @@
 			
 
 <Display>:
-	on_enter: root.create_df()
-	
-	TabbedPanel:
-        id: tp
-        do_default_tab: False
-
-        TabbedPanelItem:
-            text: 'Data Table'
-            on_release: app.nothing()
-
-		TabbedPanelItem:
-            text: 'Why not?'
-            on_release: app.add_tab()
-            
-		TabbedPanelItem:
-			text: 'Go Back'
-			on_release: 
-				root.manager.current = "startup"
-				root.manager.transition.direction = "right"
-
+	on_pre_enter: root.build_columns_as_tabs()

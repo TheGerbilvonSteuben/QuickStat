@@ -39,23 +39,28 @@ class Startup(Screen):
 # Data Analysis screen/window
 class Display(Screen):
     """Screen for displaying statistics from given csv file."""
-    # Create dataframe from selected csv
-    def create_df(self):
-        """Function for creating a dataframe from given csv file."""
+
+    # def add_widget(self, widget, *args, **kwargs):
+    #     return super().add_widget(widget, *args, **kwargs)
+
+    # TODO: the 2nd Screen is currently showing as blank
+    # make it display the tabbedpanel in Display Screen
+    # the two print statements imply that:
+    #       1. df is correctly created
+    #       2. tp seems to have been populated
+    def build_columns_as_tabs(self):
         global FILEPATH
         global DF
-        df = pd.read_csv(FILEPATH[0])
-        print(df.head)
+        DF = pd.read_csv(FILEPATH[0])
+        # print(DF.head())
+        tp = TabbedPanel()
+        for column_header in DF:
+            # print(column_header)
+            th = TabbedPanelHeader(text=column_header)
+            tp.add_widget(th)
+        # print(tp.tab_list)
 
-        result = df.select_dtypes(include='number')
-        # print(result)
-
-        numeric_cols = result.columns.values
-        # print(numeric_cols)
-
-        for col_name in numeric_cols:
-            print(col_name, " Mean:", df[col_name].mean())
-        print(df.describe())
+        # Display.add_widget(tp)
 
 
 # Designate Our .kv design file
@@ -66,14 +71,6 @@ class QuickStat(App):
     """Main application"""
     # Window Title
     title = 'QuickStat'
-
-    def nothing(self):
-        print('test')
-
-    def add_tab(self):
-        tp = TabbedPanel()
-        th = TabbedPanelHeader(text='Tab2')
-        tp.add_widget(th)
 
     def build(self):
         """Builds the app"""
