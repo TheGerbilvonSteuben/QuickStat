@@ -45,4 +45,11 @@
 			
 
 <Display>:
-	on_pre_enter: root.build_columns_as_tabs()
+	on_enter: root.build_columns_as_tabs()
+
+	TabbedPanel:
+		id: tp
+		do_default_tab: False
+
+		TabbedPanelItem:
+			text: 'Loading Tabs...'
