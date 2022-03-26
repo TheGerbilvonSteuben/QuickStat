@@ -13,7 +13,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
 import pandas as pd
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
-from kivy.uix.label import Label
+
 
 # Set the app size
 Window.size = (400, 260)
@@ -50,9 +50,7 @@ class Display(Screen):
         tp.do_default_tab = False
         for column_header in DF:
             th = TabbedPanelHeader(text=column_header)
-            label = Label(text='yolo')
             tp.add_widget(th)
-            tp.add_widget(label, 1)
         self.add_widget(tp)
 
 
