@@ -40,27 +40,20 @@ class Startup(Screen):
 class Display(Screen):
     """Screen for displaying statistics from given csv file."""
 
-    # def add_widget(self, widget, *args, **kwargs):
-    #     return super().add_widget(widget, *args, **kwargs)
-
-    # TODO: the 2nd Screen is currently showing as blank
-    # make it display the tabbedpanel in Display Screen
-    # the two print statements imply that:
-    #       1. df is correctly created
-    #       2. tp seems to have been populated
     def build_columns_as_tabs(self):
+        """Create, populate & add tabbed_panel"""
         global FILEPATH
         global DF
         DF = pd.read_csv(FILEPATH[0])
-        # print(DF.head())
-        tp = TabbedPanel()
-        for column_header in DF:
-            # print(column_header)
-            th = TabbedPanelHeader(text=column_header)
-            tp.add_widget(th)
-        # print(tp.tab_list)
 
-        # Display.add_widget(tp)
+        tp = TabbedPanel()
+        tp.do_default_tab = False
+        for column_header in DF:
+            print(column_header)
+            th = TabbedPanelHeader(text=column_header)
+            
+            tp.add_widget(th)
+        self.add_widget(tp)
 
 
 # Designate Our .kv design file
