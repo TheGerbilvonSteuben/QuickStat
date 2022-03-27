@@ -8,6 +8,7 @@ A app for retreiving statistics from a csv file.
 # kivy_venv\Scripts\activate
 
 from kivy.app import App
+from kivy.uix.rst import RstDocument
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
@@ -51,6 +52,9 @@ class Display(Screen):
         for column_header in DF:
             th = TabbedPanelHeader(text=column_header)
             tp.add_widget(th)
+            result = str(DF.groupby([column_header])['Total Cost'].median())
+            print(result) # Used to compare results in App only.
+            th.content = RstDocument(text = result)
         self.add_widget(tp)
 
 
