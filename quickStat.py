@@ -13,6 +13,7 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
 import pandas as pd
+from pandas.api.types import is_numeric_dtype
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
 
 
@@ -49,12 +50,43 @@ class Display(Screen):
         # print(DF)
         tp = TabbedPanel()
         tp.do_default_tab = False
-        for column_header in DF:
-            th = TabbedPanelHeader(text=column_header)
+
+        new_line = "\n"
+
+        for col_name in DF:
+            col = DF[col_name]
+            th = TabbedPanelHeader(text=col_name)
             tp.add_widget(th)
-            result = str(DF.groupby([column_header])['Total Cost'].median())
-            print(result) # Used to compare results in App only.
-            th.content = RstDocument(text = result)
+
+            is_num = is_numeric_dtype(col)
+
+            # list to be used for str.join
+            stat_string_list = []
+
+            count_string = "Count: " + str(col.count())
+            stat_string_list.append(count_string)
+
+            unique_count_string = ("Unique count: " + str(col.value_counts())
+                                   + new_line)
+            stat_string_list.append(unique_count_string)
+
+            if is_num:
+                mean_string = "Mean: " + str(col.mean()) + new_line
+                stat_string_list.append(mean_string)
+
+                median_string = "Median: " + str(col.median()) + new_line
+                stat_string_list.append(median_string)
+
+                mode_string = "Mode: " + str(col.mode()) + new_line
+                stat_string_list.append(mode_string)
+
+            # Make the final string
+            stat_string = ' '.join(stat_string_list)
+
+            th.content = RstDocument(text=stat_string)
+            # th.content = label2
+            # print(result)
+
         self.add_widget(tp)
 
 
