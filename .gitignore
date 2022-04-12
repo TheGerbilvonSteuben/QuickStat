@@ -1,2 +1,7 @@
 .vscode/
 .vs/
+.__pycache__/
+.build/
+.dist/
+my_script.spec
+quickStat.spec
