@@ -7,8 +7,8 @@ A app for retreiving statistics from a csv file.
 # activate virtual environment
 # kivy_venv\Scripts\activate
 
+from kivy.uix.label import Label
 from kivy.app import App
-from kivy.uix.rst import RstDocument
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from plyer import filechooser
@@ -52,6 +52,7 @@ class Display(Screen):
         tp.do_default_tab = False
 
         new_line = "\n"
+        new_para = "\n\n"
 
         for col_name in DF:
             col = DF[col_name]
@@ -65,27 +66,25 @@ class Display(Screen):
 
             count_string = "Count: " + str(col.count())
             stat_string_list.append(count_string)
+            stat_string_list.append(new_para)
 
-            unique_count_string = ("Unique count: " + str(col.value_counts())
-                                   + new_line)
+            unique_count_string = ("Unique count: " + new_line +
+                                   str(col.value_counts().nlargest(5)))
             stat_string_list.append(unique_count_string)
+            stat_string_list.append(new_para)
 
             if is_num:
-                mean_string = "Mean: " + str(col.mean()) + new_line
+                mean_string = "Mean: " + str(col.mean())
                 stat_string_list.append(mean_string)
+                stat_string_list.append(new_para)
 
-                median_string = "Median: " + str(col.median()) + new_line
+                median_string = "Median: " + str(col.median())
                 stat_string_list.append(median_string)
-
-                mode_string = "Mode: " + str(col.mode()) + new_line
-                stat_string_list.append(mode_string)
+                stat_string_list.append(new_para)
 
             # Make the final string
-            stat_string = ' '.join(stat_string_list)
-
-            th.content = RstDocument(text=stat_string)
-            # th.content = label2
-            # print(result)
+            stat_string = ''.join(stat_string_list)
+            th.content = Label(text=stat_string)
 
         self.add_widget(tp)
 
