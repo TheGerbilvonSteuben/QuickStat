@@ -1,5 +1,5 @@
 """
-A app for retreiving statistics from a csv file.
+A app for retreiving basic statistics from a csv file.
 """
 # create a virtual environment in your current directory
 # python -m virtualenv kivy_venv
@@ -44,7 +44,6 @@ class Startup(Screen):
 # Data Analysis screen/window
 class Display(Screen):
     """Screen for displaying statistics from given csv file."""
-    
     def switchScreens(self, value):
         if self.manager.current == 'display':
             self.manager.current = 'startup'
@@ -80,9 +79,9 @@ class Display(Screen):
         grid.add_widget(back_btn)
         self.add_widget(grid)
 
+
 class Manager(ScreenManager):
-    display = ObjectProperty(None)
-    startup = ObjectProperty(None)
+    pass
 
 
 class QuickStat(App):
