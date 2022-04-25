@@ -47,6 +47,7 @@ class Display(Screen):
     def switchScreens(self, value):
         if self.manager.current == 'display':
             self.manager.current = 'startup'
+            self.manager.transition.direction = "right"
 
 
     def build_columns_as_tabs(self):
