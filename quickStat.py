@@ -7,7 +7,9 @@ A app for retreiving statistics from a csv file.
 # activate virtual environment
 # kivy_venv\Scripts\activate
 
+from kivy.uix.button import Button
 from kivy.uix.label import Label
+from kivy.uix.gridlayout import GridLayout
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -15,6 +17,7 @@ from plyer import filechooser
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
+from kivy.properties import ObjectProperty
 
 
 # Set the app size
@@ -41,52 +44,45 @@ class Startup(Screen):
 # Data Analysis screen/window
 class Display(Screen):
     """Screen for displaying statistics from given csv file."""
+    
+    def switchScreens(self, value):
+        if self.manager.current == 'display':
+            self.manager.current = 'startup'
+
 
     def build_columns_as_tabs(self):
         """Create, populate & add tabbed_panel"""
         global FILEPATH
         global DF
         DF = pd.read_csv(FILEPATH[0])
-        # print(DF)
+        grid = GridLayout(cols=2)
         tp = TabbedPanel()
         tp.do_default_tab = False
 
-        new_line = "\n"
-        new_para = "\n\n"
-
         for col_name in DF:
             col = DF[col_name]
-            th = TabbedPanelHeader(text=col_name)
-            tp.add_widget(th)
-
             is_num = is_numeric_dtype(col)
-
-            # list to be used for str.join
-            stat_string_list = []
-
-            count_string = "Count: " + str(col.count())
-            stat_string_list.append(count_string)
-            stat_string_list.append(new_para)
-
-            unique_count_string = ("Unique count: " + new_line +
-                                   str(col.value_counts().nlargest(5)))
-            stat_string_list.append(unique_count_string)
-            stat_string_list.append(new_para)
-
             if is_num:
-                mean_string = "Mean: " + str(col.mean())
-                stat_string_list.append(mean_string)
-                stat_string_list.append(new_para)
+                th = TabbedPanelHeader(text=col_name)
+                grid.add_widget(Label(text="Number of entries: " + str(col.count())))
+                grid.add_widget(Label(text="Mean: " + str(col.mean())))
+                grid.add_widget(Label(text="Median: " + str(col.median())))
+                grid.add_widget(Label(text="Max: " + str(col.max())))
+                grid.add_widget(Label(text="Min: " + str(col.min())))
+                th.content = grid
+                tp.add_widget(th)
+                grid = GridLayout(cols=2)
 
-                median_string = "Median: " + str(col.median())
-                stat_string_list.append(median_string)
-                stat_string_list.append(new_para)
+        grid = GridLayout(cols=1)
+        back_btn = Button(text="Select Another Data Set")
+        back_btn.bind(on_press=self.switchScreens)
+        grid.add_widget(tp)
+        grid.add_widget(back_btn)
+        self.add_widget(grid)
 
-            # Make the final string
-            stat_string = ''.join(stat_string_list)
-            th.content = Label(text=stat_string)
-
-        self.add_widget(tp)
+class Manager(ScreenManager):
+    display = ObjectProperty(None)
+    startup = ObjectProperty(None)
 
 
 class QuickStat(App):
@@ -96,7 +92,8 @@ class QuickStat(App):
 
     def build(self):
         """Builds the app"""
-        return ScreenManager()
+        m = Manager()
+        return m
 
 
 if __name__ == '__main__':

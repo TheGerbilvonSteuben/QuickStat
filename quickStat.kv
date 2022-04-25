@@ -1,10 +1,19 @@
 #:kivy 2.0
 #:import webbrowser webbrowser
-<ScreenManager>:
+<Manager>:
+	id: screen_manager
+
+	display: display
+	startup:startup
+
 	Startup:
-		name: 'startup'
+		id: startup
+		name: "startup"
+		manager: screen_manager
 	Display:
+		id: display
 		name: 'display'
+		manager: screen_manager
 
 <Startup>:
 	BoxLayout:
