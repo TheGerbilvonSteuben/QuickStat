@@ -58,7 +58,9 @@ class Display(Screen):
             DF = pd.read_excel(FILEPATH[0])
         else:
             DF = pd.read_csv(FILEPATH[0])
-
+        # Clear any preexisting widgets
+        # from previously opened files
+        self.clear_widgets()
         grid = GridLayout(cols=2)
         tp = TabbedPanel()
         tp.do_default_tab = False
