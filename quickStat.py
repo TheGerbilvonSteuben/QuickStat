@@ -49,7 +49,6 @@ class Display(Screen):
             self.manager.current = 'startup'
             self.manager.transition.direction = "right"
 
-
     def build_columns_as_tabs(self):
         """Create, populate & add tabbed_panel"""
         global FILEPATH
@@ -64,11 +63,16 @@ class Display(Screen):
             is_num = is_numeric_dtype(col)
             if is_num:
                 th = TabbedPanelHeader(text=col_name)
-                grid.add_widget(Label(text="Number of entries: " + str(col.count())))
-                grid.add_widget(Label(text="Mean: " + str(col.mean())))
-                grid.add_widget(Label(text="Median: " + str(col.median())))
-                grid.add_widget(Label(text="Max: " + str(col.max())))
-                grid.add_widget(Label(text="Min: " + str(col.min())))
+                grid.add_widget(Label(text="Number of entries: "
+                                + str(col.count())))
+                grid.add_widget(Label(text="Mean: "
+                                + str(col.mean())))
+                grid.add_widget(Label(text="Median: "
+                                + str(col.median())))
+                grid.add_widget(Label(text="Max: "
+                                + str(col.max())))
+                grid.add_widget(Label(text="Min: "
+                                + str(col.min())))
                 th.content = grid
                 tp.add_widget(th)
                 grid = GridLayout(cols=2)
