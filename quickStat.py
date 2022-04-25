@@ -36,8 +36,8 @@ class Startup(Screen):
         """Lets a user select a csv file"""
         global FILEPATH
         FILEPATH = filechooser.open_file(
-            title="Pick a CSV file..",
-            filters=[("Comma-separated Values", "*.csv")])
+            title="Pick a CSV or XMLS file..",
+            filters=[("Comma-separated Values", "Microsoft Excel Worksheet", "*.csv", "*.xlsm")])
         # print(FILEPATH)
 
 
@@ -53,7 +53,12 @@ class Display(Screen):
         """Create, populate & add tabbed_panel"""
         global FILEPATH
         global DF
-        DF = pd.read_csv(FILEPATH[0])
+
+        if ".xlsm" in FILEPATH[0]:
+            DF = pd.read_excel(FILEPATH[0])
+        else:
+            DF = pd.read_csv(FILEPATH[0])
+
         grid = GridLayout(cols=2)
         tp = TabbedPanel()
         tp.do_default_tab = False
