@@ -1,0 +1,9 @@
+('C:\\Users\\jerre\\Desktop\\Senior '
+ 'Experience\\QuickStat\\kivy_venv\\share\\glew\\bin',
+ None,
+ [],
+ 'DATA',
+ [('glew32.dll',
+   'C:\\Users\\jerre\\Desktop\\Senior '
+   'Experience\\QuickStat\\kivy_venv\\share\\glew\\bin\\glew32.dll',
+   'DATA')])
