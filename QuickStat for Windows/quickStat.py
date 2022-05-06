@@ -20,7 +20,6 @@ from plyer import filechooser
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
-from kivy.properties import ObjectProperty
 
 
 # Set the app size
@@ -62,7 +61,7 @@ class Display(Screen):
             DF = pd.read_excel(FILEPATH[0])
         else:
             DF = pd.read_csv(FILEPATH[0])
-        
+
         # Clear any preexisting widgets
         # from previously opened csv files
         self.clear_widgets()
