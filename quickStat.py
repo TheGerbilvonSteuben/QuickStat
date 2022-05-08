@@ -115,11 +115,14 @@ class QuickStat(App):
 
 
 if __name__ == '__main__':
-    try:
-        if hasattr(sys, '_MEIPASS'):
-            resource_add_path(os.path.join(sys._MEIPASS))
-        app = QuickStat()
-        app.run()
-    except Exception as e:
-        print(e)
-        input("Press enter.")
+    QuickStat().run()
+
+    # Testing Purposes Only: Keeps Console open behind app window
+    # try:
+    #     if hasattr(sys, '_MEIPASS'):
+    #         resource_add_path(os.path.join(sys._MEIPASS))
+    #     app = QuickStat()
+    #     app.run()
+    # except Exception as e:
+    #     print(e)
+    #     input("Press enter.")
