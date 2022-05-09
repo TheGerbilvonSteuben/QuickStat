@@ -275,7 +275,7 @@ class Display_3(Screen):
                 result.append(Label(text=each))
                 temp_string = "Count = " + str(cnt_dict[column][each])
                 result.append(Label(text=(temp_string)))
-                temp_string = "Percentage Ratio = " 
+                temp_string = "Percentage Ratio = "
                 temp_string += str(perc_dict[column][each]) + "%"
                 result.append(Label(text=(temp_string),
                                     halign='left'))
@@ -341,7 +341,7 @@ class Display_3(Screen):
         for each in data_per_unique_dictionary[column]:
             temp_float = round(np.sum(data_per_unique_dictionary[column][each][column_to_stat]), 2)
             sum_dictionary[column][each][column_to_stat] = temp_float
-            temp_float = round(min(data_per_unique_dictionary[column][each][column_to_stat]), 2) 
+            temp_float = round(min(data_per_unique_dictionary[column][each][column_to_stat]), 2)
             min_dictionary[column][each][column_to_stat] = temp_float
             max_dictionary[column][each][column_to_stat] = round(max(data_per_unique_dictionary[column][each][column_to_stat]), 2)
             avg_dictionary[column][each][column_to_stat] = round(np.average(data_per_unique_dictionary[column][each][column_to_stat]), 2)
