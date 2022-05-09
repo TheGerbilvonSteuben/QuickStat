@@ -147,7 +147,7 @@ class Display_2(Screen):
 
     def go_next_function(self, value):
         if self.manager.current == 'display_2':
-            Window.fullscreen = 'auto'
+            # Window.fullscreen = 'auto'
             self.manager.current = 'display_3'
             self.manager.transition.direction = "right"
             self.clear_up_page()
@@ -374,12 +374,3 @@ class MyApp(App):
 if __name__ == '__main__':
     MyApp().run()
 
-    # Testing Purposes Only: Keeps Console open behind app window
-    # try:
-    #     if hasattr(sys, '_MEIPASS'):
-    #         resource_add_path(os.path.join(sys._MEIPASS))
-    #     app = QuickStat()
-    #     app.run()
-    # except Exception as e:
-    #     print(e)
-    #     input("Press enter.")
