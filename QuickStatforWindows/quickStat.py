@@ -148,7 +148,7 @@ class Display_2(Screen):
 
     def go_next_function(self, value):
         if self.manager.current == 'display_2':
-            Window.size = (1100, 1500)
+            Window.size = (1500, 500)
             self.manager.current = 'display_3'
             self.manager.transition.direction = "right"
             self.clear_up_page()
