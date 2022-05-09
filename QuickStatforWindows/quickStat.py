@@ -362,7 +362,7 @@ class Manager(ScreenManager):
 class MyApp(App):
     # Window Title
     title = 'QuickStat'
-    
+
     def build(self):
         """Builds the app"""
         m = Manager()
