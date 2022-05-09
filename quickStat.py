@@ -29,6 +29,7 @@ from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
 
 
 Window.size = (400, 260)
+# kv_file = Builder.load_file('quickStat.kv') //Uncomment when coding.
 
 # Global variables
 FILEPATH = ''
@@ -147,7 +148,7 @@ class Display_2(Screen):
 
     def go_next_function(self, value):
         if self.manager.current == 'display_2':
-            # Window.fullscreen = 'auto'
+            Window.size = (1100, 1500)
             self.manager.current = 'display_3'
             self.manager.transition.direction = "right"
             self.clear_up_page()
@@ -354,9 +355,6 @@ class Display_3(Screen):
         return result
 
 
-kv_file = Builder.load_file('quickStat.kv')
-
-
 class Manager(ScreenManager):
     pass
 
@@ -364,7 +362,7 @@ class Manager(ScreenManager):
 class MyApp(App):
     # Window Title
     title = 'QuickStat'
-
+    
     def build(self):
         """Builds the app"""
         m = Manager()
@@ -372,4 +370,12 @@ class MyApp(App):
 
 
 if __name__ == '__main__':
-    MyApp().run()
+    try:
+        if hasattr(sys, '_MEIPASS'):
+            resource_add_path(os.path.join(sys._MEIPASS))
+            kv_file = Builder.load_file('quickStat.kv')
+        app = MyApp()
+        app.run()
+    except Exception as e:
+        print(e)
+        input("Press enter.")
