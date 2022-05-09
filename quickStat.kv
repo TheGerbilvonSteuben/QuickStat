@@ -1,20 +1,14 @@
 #:kivy 2.0
 #:import webbrowser webbrowser
-<Manager>:
-	id: screen_manager
-
-	display: display
-	startup:startup
-
+<ScreenManager>:
 	Startup:
-		id: startup
-		name: "startup"
-		manager: screen_manager
-
-	Display:
-		id: display
-		name: 'display'
-		manager: screen_manager
+		name: 'startup'
+	Display_1:
+		name: 'display_1'
+	Display_2:
+		name: 'display_2'
+	Display_3:
+		name: 'display_3'
 
 <Startup>:
 	BoxLayout:
@@ -29,14 +23,16 @@
 			font_size: 32
 			background_normal: ''
 			background_color: (0,.6,0,1)
+			on_release:
+				root.file_selector()
+				root.manager.current = 'display_1'
+				root.manager.transition.direction = 'left'
+				
 			size_hint_y: None
 			height: 25
 			size: (50, 100)
-			on_release: 
-				root.file_chooser()
-				root.manager.current = 'display'
-				root.manager.transition.direction = 'left'
-		
+						
+
 		Button:
 			text:'QuickStat Team. All Rights Reserved.'
 			font_size: 17
@@ -52,7 +48,17 @@
 					size: self.size
 					pos: self.pos
 			on_release: webbrowser.open('https://github.com/TheGerbilvonSteuben/QuickStat')
-			
 
-<Display>:
+
+<Display_1>:
+	on_enter: root.data_fill()
+	GridLayout:
+		cols: 2
+
+<Display_2>:
+	on_enter: root.data_fill()
+	GridLayout:
+		cols: 2
+
+<Display_3>:
 	on_enter: root.build_columns_as_tabs()
